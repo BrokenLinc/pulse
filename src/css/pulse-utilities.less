@@ -1,24 +1,8 @@
-@import "vendor/elements";
+@import "mixins/all";
 
-// Clearfix
-// --------
-// For clearing floats like a boss h5bp.com/q
-.pulse-clearfix {
-	*zoom: 1;
-	&:before,
-	&:after {
-		display: table;
-		content: "";
-		// Fixes Opera/contenteditable bug:
-		// http://nicolasgallagher.com/micro-clearfix-hack/#comment-36952
-		line-height: 0;
-	}
-	&:after {
-		clear: both;
-	}
-}
+.pulse-clearfix {		.using-pulse-clearfix;		}
 
-.pulse-hide-opacity {	.opacity(0);	}
-.pulse-show-opacity {	.opacity(1);	}
-.pulse-hide-scale {		.scale(0);		}
-.pulse-show-scale {		.scale(1);		}
+.pulse-hide-opacity {	.using-pulse-hide-opacity;	}
+.pulse-show-opacity {	.using-pulse-show-opacity;	}
+.pulse-hide-scale {		.using-pulse-hide-scale;	}
+.pulse-show-scale {		.using-pulse-show-scale;	}

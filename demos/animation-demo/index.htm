@@ -2,11 +2,70 @@
 <html>
 	<head>
 		<title>Animation Demo</title>
+
 		<link rel="stylesheet" type="text/css" href="../../src/css/pulse-utilities.css">
 		<link rel="stylesheet" type="text/css" href="../../src/css/pulse-animation.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 		<script data-main="../../src/js/pulse-animation" src="../../src/js/vendor/require.js"></script>
 	</head>
 	<body>
-		<h1>Animation Demo</h1>
+		<h1>Hover Animation Demos</h1>
+
+		<h3>Pure CSS using mixins</h3>
+		<ul class="demo-list using-mixins">
+			<li class="demo-1"><span></span></li>
+			<li class="demo-2"><span></span></li>
+			<li class="demo-3"><span></span></li>
+			<li class="demo-4"><span></span></li>
+		</ul>
+
+		<h3>Manual class toggle using jQuery</h3>
+		<ul class="demo-list using-jquery">
+			<li class="demo-1"><span></span></li>
+			<li class="demo-2"><span></span></li>
+			<li class="demo-3"><span></span></li>
+			<li class="demo-4"><span></span></li>
+		</ul>
+
+		<script>
+		$(function(){
+
+			//Manual class toggle using jQuery
+			$('.demo-list.using-jquery .demo-1').hover(function(){
+				$(this).children().toggleClass('pulse-hide-opacity');
+			});
+			$('.demo-list.using-jquery .demo-2').hover(function(){
+				$(this).children().toggleClass('pulse-hide-scale');
+			});
+			$('.demo-list.using-jquery .demo-3').hover(function(){
+				$(this).children().toggleClass('pulse-hide-opacity');
+			}).children().toggleClass('pulse-hide-opacity');
+			$('.demo-list.using-jquery .demo-4').hover(function(){
+				$(this).children().toggleClass('pulse-hide-scale');
+			}).children().toggleClass('pulse-hide-scale');
+
+			setTimeout(function() {
+				$('.demo-list.using-jquery > * > *').addClass('pulse-transition');
+			}, 10)
+
+			//Coming Soon...
+
+			//Manual toggle using $.pulse
+			//$elements.pulse().toggle('opacity');
+
+			//Staggered list display using $.pulse
+			//$elements.pulse().showStaggered('opacity');
+
+			//Fluid list-item removal using $.pulse
+			//$element.pulse().remove('scale');
+
+			//Callback example
+			//$elements.pulse().hide('opacity').done(function(){ alert('done!'); });
+
+		});
+		</script>
+
 	</body>
 </html>

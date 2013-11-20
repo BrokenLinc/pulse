@@ -1,11 +1,4 @@
-@import "vendor/elements";
+@import "mixins/all";
 
-@transition-duration: 0.4s;
-@micro-transition-duration: 0.1s;
-
-.pulse-transition {
-	.transition(@transition-duration);
-}
-.pulse-micro-transition {
-	.transition(@micro-transition-duration);
-}
+.pulse-transition {			.using-pulse-transition;		}
+.pulse-micro-transition {	.using-pulse-micro-transition;	}

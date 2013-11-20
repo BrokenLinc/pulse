@@ -1,0 +1,98 @@
+/*---------------------------------------------------
+    LESS Elements 0.9
+  ---------------------------------------------------
+    A set of useful LESS mixins
+    More info at: http://lesselements.com
+  ---------------------------------------------------*/
+body {
+  font-family: myriad-pro, Arial, sans-serif;
+  color: #333;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+}
+.demo-list {
+  list-style: none;
+  *zoom: 1;
+  margin: 0;
+  padding: 0;
+}
+.demo-list:before,
+.demo-list:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.demo-list:after {
+  clear: both;
+}
+.demo-list > * {
+  display: block;
+  width: 100px;
+  height: 100px;
+  margin: 0 5px 10px;
+  float: left;
+  border: 1px solid #999;
+}
+.demo-list > * > * {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: red;
+}
+.demo-list.using-mixins > * > * {
+  -webkit-transition: all 0.4s ease-out;
+  -moz-transition: all 0.4s ease-out;
+  -o-transition: all 0.4s ease-out;
+  transition: all 0.4s ease-out;
+}
+.demo-list.using-mixins .demo-1:hover > * {
+  -moz-opacity: 0;
+  -khtml-opacity: 0;
+  -webkit-opacity: 0;
+  opacity: 0;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+  filter: alpha(opacity=0);
+}
+.demo-list.using-mixins .demo-2:hover > * {
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -o-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+}
+.demo-list.using-mixins .demo-3 > * {
+  -moz-opacity: 0;
+  -khtml-opacity: 0;
+  -webkit-opacity: 0;
+  opacity: 0;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+  filter: alpha(opacity=0);
+}
+.demo-list.using-mixins .demo-3:hover > * {
+  -moz-opacity: 1;
+  -khtml-opacity: 1;
+  -webkit-opacity: 1;
+  opacity: 1;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=100);
+  filter: alpha(opacity=100);
+}
+.demo-list.using-mixins .demo-4 > * {
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -o-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+}
+.demo-list.using-mixins .demo-4:hover > * {
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -o-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
