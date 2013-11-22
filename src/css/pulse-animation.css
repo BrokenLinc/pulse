@@ -4,21 +4,9 @@
     A set of useful LESS mixins
     More info at: http://lesselements.com
   ---------------------------------------------------*/
-.pulse-transition {
-  -webkit-transition: all 0.4s ease-out;
-  -moz-transition: all 0.4s ease-out;
-  -o-transition: all 0.4s ease-out;
-  transition: all 0.4s ease-out;
-}
-.pulse-transition-duration-micro {
-  -moz-transition-duration: 0.2s;
-  -webkit-transition-duration: 0.2s;
-  -o-transition-duration: 0.2s;
-  transition-duration: 0.2s;
-}
-.pulse-transition-timing-function-linear {
-  -webkit-transition-timing-function: 'linear';
-  -moz-transition-timing-function: 'linear';
-  -o-transition-timing-function: 'linear';
-  transition-timing-function: 'linear';
+.pulse-no-transition {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
 }

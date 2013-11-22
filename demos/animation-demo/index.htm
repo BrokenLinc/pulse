@@ -16,7 +16,7 @@
 
 			<h3>Pure CSS using mixins</h3>
 			<p>(No javascript required)</p>
-			<ul class="demo-list using-mixins">
+			<ul class="demo-list using-less-mixins">
 				<li class="demo-1"><span></span></li>
 				<li class="demo-2"><span></span></li>
 				<li class="demo-3"><span></span></li>
@@ -25,11 +25,11 @@
 
 			<h3>Manual class toggle using CSS classes &amp; jQuery</h3>
 			<p>(No plugins required)</p>
-			<ul class="demo-list using-jquery">
-				<li class="demo-1"><span class="pulse-transition"></span></li>
-				<li class="demo-2"><span class="pulse-transition"></span></li>
-				<li class="demo-3"><span class="pulse-transition pulse-hide-opacity"></span></li>
-				<li class="demo-4"><span class="pulse-transition pulse-hide-scale"></span></li>
+			<ul class="demo-list using-css-and-jquery">
+				<li class="demo-1"><span></span></li>
+				<li class="demo-2"><span></span></li>
+				<li class="demo-3"><span class="pulse-hidden"></span></li>
+				<li class="demo-4"><span class="pulse-hidden"></span></li>
 			</ul>
 
 			<h3>Manual toggle using $.pulse</h3>
@@ -64,42 +64,24 @@
 		$(function(){
 
 			//Manual class toggle using CSS classes & jQuery
-			$('.demo-list.using-jquery .demo-1').hover(function(){
-				$(this).children().toggleClass('pulse-hide-opacity');
-			});
-			$('.demo-list.using-jquery .demo-2').hover(function(){
-				$(this).children().toggleClass('pulse-hide-scale');
-			});
-			$('.demo-list.using-jquery .demo-3').hover(function(){
-				$(this).children().toggleClass('pulse-hide-opacity');
-			});
-			$('.demo-list.using-jquery .demo-4').hover(function(){
-				$(this).children().toggleClass('pulse-hide-scale');
+			$('.demo-list.using-css-and-jquery > *').hover(function(){
+				$(this).children().toggleClass('pulse-hidden');
 			});
 
 			//Manual toggle using $.pulse
-			$('.demo-list.using-pulse .demo-1').hover(function(){
-				$(this).children().pulse().toggle('opacity');
-			});
-			$('.demo-list.using-pulse .demo-2').hover(function(){
-				$(this).children().pulse().toggle('scale');
-			});
-			$('.demo-list.using-pulse .demo-3').hover(function(){
-				$(this).children().pulse().toggle('opacity');
-			}).children().pulse().toggleNow('opacity');
-			$('.demo-list.using-pulse .demo-4').hover(function(){
-				$(this).children().pulse().toggle('scale');
-			}).children().pulse().toggleNow('scale');
+			$('.demo-list.using-pulse > *').hover(function(){
+				$(this).children().pulse().toggle();
+			}).filter('.demo-3, .demo-4').children().pulse().toggleNow();
 
 			//Staggered Animation using scale
 			$('.demo-list.staggered.using-scale').hover(function(){
-				$('span', this).pulse().toggleList('scale');
-			}).find('span').pulse().toggleNow('scale');
+				$('span', this).pulse().toggleList();
+			}).find('span').pulse().toggleNow();
 
 			//Staggered Animation using opacity
 			$('.demo-list.staggered.using-opacity').hover(function(){
-				$('span', this).pulse().toggleList('opacity');
-			}).find('span').pulse().toggleNow('opacity');
+				$('span', this).pulse().toggleList();
+			}).find('span').pulse().toggleNow();
 
 		});
 		</script>

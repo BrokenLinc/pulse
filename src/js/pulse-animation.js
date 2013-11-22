@@ -1,7 +1,6 @@
 // Examples
 // pulse.animation.removeFromList(selector[, method]).done(function(){});
 // pulse.animation.addToList(selector, parentSelector[, method, afterSelector]).done(function(){});
-// pulse.animation.showList(selector[, method, isStaggered]).done(function(){});
 // pulse.animation.pingPong(selector, class);
 
 (function($) {
@@ -15,12 +14,12 @@
 
 	parts = {
 
-		toggle: function(prop, notAnimated){
-			return $(this).toggleClass('pulse-transition', !notAnimated).toggleClass(prefix('pulse-hide-', prop));
+		toggle: function(){;
+			return $(this).removeClass('pulse-no-transition').toggleClass('pulse-hidden');
 		},
 
-		toggleNow: function(prop){
-			return $(this).removeClass('pulse-transition').toggleClass(prefix('pulse-hide-', prop));
+		toggleNow: function(){
+			return $(this).addClass('pulse-no-transition').toggleClass('pulse-hidden');
 		},
 
 		toggleList: function(prop){
@@ -43,15 +42,5 @@
 		},
 
 	};
-
-	function prefix(pre, strings) {
-		var a = [], props = (strings.indexOf(' ') >= 0)? strings.split(' ') : [strings];
-
-		for(var i = 0; i < props.length; i++) {
-			if(props[i].length > 0) a.push(pre+props[i]);
-		}
-
-		return a.join(' ');
-	}
 
 })(jQuery);

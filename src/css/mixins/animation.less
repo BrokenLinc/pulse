@@ -1,40 +1,8 @@
 @import "../vendor/elements";
 
-//Parametric mixins
-.transition-timing-function(@ease) {
-	-webkit-transition-timing-function: @ease;
-	-moz-transition-timing-function:  @ease;
-	-o-transition-timing-function: @ease;
-	transition-timing-function: @ease;
-}
-
-//Config variables
-@transition-duration: 0.4s;
-@transition-duration-micro: 0.2s;
-
-//Defaults
-.using-pulse-transition() {
-	.transition(@transition-duration);
-}
-
-//Durations
-.using-pulse-transition-duration-micro() {
-	.transition-duration(@transition-duration-micro);
-}
-
-//Timing functions
-.using-pulse-transition-timing-function-linear() {
-	.transition-timing-function('linear');
-}
-.using-pulse-transition-timing-function-ease() {
-	.transition-timing-function('ease');
-}
-.using-pulse-transition-timing-function-ease-in() {
-	.transition-timing-function('ease-in');
-}
-.using-pulse-transition-timing-function-ease-out() {
-	.transition-timing-function('ease-out');
-}
-.using-pulse-transition-timing-function-ease-in-out() {
-	.transition-timing-function('ease-in-out');
+.pulse-no-transition {
+	-webkit-transition: none !important;
+	-moz-transition: none !important;
+	-o-transition: none !important;
+	transition: none !important;
 }
