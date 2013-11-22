@@ -4,9 +4,21 @@
     A set of useful LESS mixins
     More info at: http://lesselements.com
   ---------------------------------------------------*/
+html,
+body {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
 body {
   font-family: myriad-pro, Arial, sans-serif;
-  color: #333;
+  color: #678;
+  background: #234;
+  font-size: 14px;
+}
+.perimeter {
+  padding: 20px;
 }
 h1,
 h2,
@@ -15,12 +27,40 @@ h4,
 h5,
 h6 {
   font-weight: normal;
+  line-height: 1em;
+}
+h1 {
+  font-size: 35px;
+}
+h3 {
+  font-size: 21px;
+}
+p {
+  line-height: 1.5em;
 }
 .demo-list {
   list-style: none;
-  *zoom: 1;
   margin: 0;
   padding: 0;
+  margin: 0 -5px 10px;
+}
+.demo-list > * {
+  display: block;
+  width: 100px;
+  height: 100px;
+  margin: 0 5px 10px;
+  float: left;
+  border: 1px dashed #678;
+  padding: 1px;
+}
+.demo-list > * > * {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: #957;
+}
+.demo-list {
+  *zoom: 1;
 }
 .demo-list:before,
 .demo-list:after {
@@ -30,20 +70,6 @@ h6 {
 }
 .demo-list:after {
   clear: both;
-}
-.demo-list > * {
-  display: block;
-  width: 100px;
-  height: 100px;
-  margin: 0 5px 10px;
-  float: left;
-  border: 1px solid #999;
-}
-.demo-list > * > * {
-  display: block;
-  width: 100%;
-  height: 100%;
-  background-color: red;
 }
 .demo-list.using-mixins > * > * {
   -webkit-transition: all 0.4s ease-out;
