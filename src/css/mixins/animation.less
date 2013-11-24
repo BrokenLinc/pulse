@@ -1,8 +1,24 @@
 @import "../vendor/elements";
 
-.pulse-no-transition {
+.transition-delay(@delay: 0.2s) {
+  -moz-transition-delay: @delay;
+  -webkit-transition-delay: @delay;
+  -o-transition-delay: @delay;
+  transition-delay: @delay;
+}
+
+.using-pulse-no-transition() {
 	-webkit-transition: none !important;
 	-moz-transition: none !important;
 	-o-transition: none !important;
 	transition: none !important;
+}
+
+.using-pulse-moving() {
+	.transition(0.2s);
+	.transition-delay(0.2s);
+
+	&.pulse-hidden {
+		.transition-delay(0);
+	}
 }

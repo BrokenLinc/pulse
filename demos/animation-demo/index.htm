@@ -3,59 +3,47 @@
 	<head>
 		<title>Animation Demo</title>
 
-		<link rel="stylesheet" type="text/css" href="../../src/css/pulse-utilities.css">
-		<link rel="stylesheet" type="text/css" href="../../src/css/pulse-animation.css">
+		<link rel="stylesheet" type="text/css" href="../../src/css/pulse.css">
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-		<script src="../../src/js/pulse-animation.js"></script>
+		<script src="../../src/js/pulse.js"></script>
 	</head>
 	<body>
 		<div class="perimeter">
-			<h1>Hover Animation Demos</h1>
+			<h1>Single Click-to-toggle</h1>
 
-			<h3>Pure CSS using mixins</h3>
-			<p>(No javascript required)</p>
-			<ul class="demo-list using-less-mixins">
-				<li class="demo-1"><span></span></li>
-				<li class="demo-2"><span></span></li>
-				<li class="demo-3"><span></span></li>
-				<li class="demo-4"><span></span></li>
+			<ul class="demo-list single">
+				<li><span>A</span></li>
+				<li><span>B</span></li>
+				<li><span>C</span></li>
+				<li><span>D</span></li>
 			</ul>
 
-			<h3>Manual class toggle using CSS classes &amp; jQuery</h3>
-			<p>(No plugins required)</p>
-			<ul class="demo-list using-css-and-jquery">
-				<li class="demo-1"><span></span></li>
-				<li class="demo-2"><span></span></li>
-				<li class="demo-3"><span class="pulse-hidden"></span></li>
-				<li class="demo-4"><span class="pulse-hidden"></span></li>
+			<h1>Staggered Animation</h1>
+
+			<ul class="demo-list staggered">
+				<li><span>A</span></li>
+				<li><span>B</span></li>
+				<li><span>C</span></li>
+				<li><span>D</span></li>
 			</ul>
 
-			<h3>Manual toggle using $.pulse</h3>
-			<ul class="demo-list using-pulse">
-				<li class="demo-1"><span></span></li>
-				<li class="demo-2"><span></span></li>
-				<li class="demo-3"><span></span></li>
-				<li class="demo-4"><span></span></li>
-			</ul>
+			<h1>Single Click-to-remove</h1>
 
-			<h1>Staggered Animation Demos</h1>
-
-			<h3>Scaling</h3>
-			<ul class="demo-list staggered using-scale">
-				<li class="demo-1"><span></span></li>
-				<li class="demo-2"><span></span></li>
-				<li class="demo-3"><span></span></li>
-				<li class="demo-4"><span></span></li>
-			</ul>
-
-			<h3>Opacity</h3>
-			<ul class="demo-list staggered using-opacity">
-				<li class="demo-1"><span></span></li>
-				<li class="demo-2"><span></span></li>
-				<li class="demo-3"><span></span></li>
-				<li class="demo-4"><span></span></li>
+			<ul class="demo-list removal">
+				<li><span>A</span></li>
+				<li><span>B</span></li>
+				<li><span>C</span></li>
+				<li><span>D</span></li>
+				<li><span>A</span></li>
+				<li><span>B</span></li>
+				<li><span>C</span></li>
+				<li><span>D</span></li>
+				<li><span>A</span></li>
+				<li><span>B</span></li>
+				<li><span>C</span></li>
+				<li><span>D</span></li>
 			</ul>
 
 		</div>
@@ -63,25 +51,20 @@
 		<script>
 		$(function(){
 
-			//Manual class toggle using CSS classes & jQuery
-			$('.demo-list.using-css-and-jquery > *').hover(function(){
-				$(this).children().toggleClass('pulse-hidden');
+			//Single Click-to-hide
+			$('.demo-list.single li').on('click', function(){
+				$('span', this).pulse().toggle();
 			});
 
-			//Manual toggle using $.pulse
-			$('.demo-list.using-pulse > *').hover(function(){
-				$(this).children().pulse().toggle();
-			}).filter('.demo-3, .demo-4').children().pulse().toggleNow();
-
-			//Staggered Animation using scale
-			$('.demo-list.staggered.using-scale').hover(function(){
+			//Staggered Animation
+			$('.demo-list.staggered').on('click', function(){
 				$('span', this).pulse().toggleList();
-			}).find('span').pulse().toggleNow();
+			});
 
-			//Staggered Animation using opacity
-			$('.demo-list.staggered.using-opacity').hover(function(){
-				$('span', this).pulse().toggleList();
-			}).find('span').pulse().toggleNow();
+			//Single Click-to-remove
+			$('.demo-list.removal li').on('click', function(){
+				$(this).pulse().remove();
+			});
 
 		});
 		</script>

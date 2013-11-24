@@ -1,19 +1,13 @@
-@import "../vendor/elements";
-
-// Clearfix
-// --------
-// For clearing floats like a boss h5bp.com/q
-.clearfix() {
-	*zoom: 1;
-	&:before,
-	&:after {
-		display: table;
-		content: "";
-		// Fixes Opera/contenteditable bug:
-		// http://nicolasgallagher.com/micro-clearfix-hack/#comment-36952
-		line-height: 0;
-	}
-	&:after {
-		clear: both;
-	}
+.using-pulse-moving() {
+	.transition(0.2s);
+	.transition-delay(0.2s);
+}
+.using-pulse-position-absolute() {
+	position: absolute;
+}
+.using-pulse-position-relative() {
+	position: relative;
+}
+.using-pulse-removed() {
+	display:none !important;
 }

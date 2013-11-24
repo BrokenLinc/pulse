@@ -1,37 +1,21 @@
 @import "../../theme/theme";
 
 .demo-list {
-	> * > * {
+
+	.pulse-hidden {
+		.opacity(0);
+	}
+
+	li {
+		cursor: pointer;
+	}
+
+	&.single span {
 		.transition(0.4s);
 	}
 
-	&.using-less-mixins {
-
-		.demo-1:hover > * {	.opacity(0);	}
-		.demo-2:hover > * {	.scale(0);	}
-		.demo-3 {
-			> * {			.opacity(0); 	}
-			&:hover > * {	.opacity(1);	}
-		}
-		.demo-4 {
-			> * {			.scale(0); 	}
-			&:hover > * {	.scale(1);	}
-		}
-	}
-
-	&.using-css-and-jquery,
-	&.using-pulse {
-
-		.demo-1, .demo-3 {
-			.pulse-hidden {
-				.opacity(0);
-			}
-		}
-		.demo-2, .demo-4 {
-			.pulse-hidden {
-				.scale(0);
-			}
-		}
+	&.staggered span {
+		.transition(0.2s);
 	}
 
 }
