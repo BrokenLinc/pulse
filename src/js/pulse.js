@@ -1,13 +1,28 @@
 (function($) {
-	var parts, globalOptions = {
-		micro_duration: 0.05,
-		hidden_class: 'pulse-hidden',
-		no_transition_class: 'pulse-no-transition',
-		moving_class: 'pulse-moving'
+	var parts, config = {
+		class_hidden: 'pulse-hidden',
+		class_transition_none: 'pulse-no-transition',
+		class_moving: 'pulse-moving',
+		class_position_absolute: 'pulse-position-absolute',
+		class_position_relative: 'pulse-position-relative',
+		class_removed: 'pulse-removed',
+		class_duration: 'pulse-duration',
+		class_duration_micro: 'pulse-duration-micro',
+		key_moving_from: 'pulse-moving-from',
+		key_moving_to: 'pulse-moving-to'
 	};
 
-	$.fn.pulse = function (globalConfig) {
-		$.extend(globalOptions, globalConfig);
+	$(function(){
+		var $e = $('<div><div style="display:none;" class="'+config.class_duration+'"/><div style="display:none;" class="'+config.class_duration_micro+'"/></div>').appendTo(document.body);
+		var d = $('.'+config.class_duration, $e).css('transition-duration');
+		var d_m = $('.'+config.class_duration_micro, $e).css('transition-duration');
+		$e.remove();
+		config.duration = Number(d.substr(0,d.length-1));
+		config.duration_micro = Number(d_m.substr(0,d_m.length-1));
+	});
+
+	$.fn.pulse = function (custom_config) {
+		$.extend(config, custom_config);
 		$.extend(this, parts);
 		return this;
 	};
@@ -60,55 +75,55 @@
 
 			// cache current sizes/positions of container and siblings
 			$all.each(function(index){
-				cache_display(this, 'pulse-moving-from');
+				cache_display(this, config.key_moving_from);
 			});
 
 			// ***** predict new positions:
 			// simulate removal
-			$elements.addClass('pulse-removed');
+			$elements.addClass(config.class_removed);
 			// cache new sizes/positions of container and siblings
 			$all.each(function(index){
-				cache_display(this, 'pulse-moving-to');
+				cache_display(this, config.key_moving_to);
 			});
 			// undo sim
-			$elements.removeClass('pulse-removed');
+			$elements.removeClass(config.class_removed);
 
 			// ***** prep for transition
 			// shift container and siblings to absolute positioning at current position 
 			$parents.each(function(index){
-				uncache_size(this, 'pulse-moving-from');
-				if($(this).css('position') == 'static') $(this).addClass('pulse-position-relative');
+				uncache_size(this, config.key_moving_from);
+				if($(this).css('position') == 'static') $(this).addClass(config.class_position_relative);
 			});
 			$children.each(function(index){
-				uncache_size(this, 'pulse-moving-from');
-				uncache_position(this, 'pulse-moving-from');
-			}).addClass('pulse-position-absolute');
+				uncache_size(this, config.key_moving_from);
+				uncache_position(this, config.key_moving_from);
+			}).addClass(config.class_position_absolute);
 
 			// (transition delay hack)
 			setTimeout(function(){
 				// and mark as "moving"
-				$all.addClass('pulse-moving');
+				$all.addClass(config.class_moving);
 				// hide item
-				$elements.addClass('pulse-hidden');
+				$elements.addClass(config.class_hidden);
 				// and set new positions and sizes of container and siblings
 				$parents.each(function(index){
-					uncache_size(this, 'pulse-moving-to');
+					uncache_size(this, config.key_moving_to);
 				});
 				$siblings.each(function(index){
-					uncache_position(this, 'pulse-moving-to');
+					uncache_position(this, config.key_moving_to);
 				});
 
 				// ***** after animation is complete (todo: get duration via css):
 				setTimeout(function(){
 					$elements.remove();
 					//remove item and revert siblings and container to original display settings
-					$all.removeClass('pulse-position-absolute pulse-position-relative pulse-moving').css({
+					$all.removeClass([config.class_position_absolute, config.class_position_relative, config.class_moving].join(' ')).css({
 						top: '',
 						left: '',
 						width: '',
 						height: ''
 					});
-				}, 400);
+				}, config.duration * 1000);
 
 				//and fire callback (todo)
 			}, 10);
@@ -120,10 +135,10 @@
 
 	function toggle_element(element, doShow, doNow) {
 		var $element = $(element);
-		if(doNow == null) $element.removeClass(globalOptions.no_transition_class);
-		else $element.toggleClass(globalOptions.no_transition_class, doNow);
-		if(doShow == null) $element.toggleClass(globalOptions.hidden_class);
-		else $element.toggleClass(globalOptions.hidden_class, !doShow);
+		if(doNow == null) $element.removeClass(config.class_no_transition);
+		else $element.toggleClass(config.class_no_transition, doNow);
+		if(doShow == null) $element.toggleClass(config.class_hidden);
+		else $element.toggleClass(config.class_hidden, !doShow);
 		return $element;
 	}
 
@@ -137,7 +152,7 @@
 			done = function() {
 				clearInterval(interval);
 			},
-			interval = setInterval(step, globalOptions.micro_duration * 1000);
+			interval = setInterval(step, config.duration_micro * 1000);
 		return $(elements);
 	}
 

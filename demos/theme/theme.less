@@ -1,22 +1,4 @@
-@import "../../../src/css/vendor/elements";
-
-// Clearfix
-// --------
-// For clearing floats like a boss h5bp.com/q
-.clearfix() {
-	*zoom: 1;
-	&:before,
-	&:after {
-		display: table;
-		content: "";
-		// Fixes Opera/contenteditable bug:
-		// http://nicolasgallagher.com/micro-clearfix-hack/#comment-36952
-		line-height: 0;
-	}
-	&:after {
-		clear: both;
-	}
-}
+@import "../../../src/css/vendor/bootstrap-mixins";
 
 html, body {
 	padding:0;
@@ -54,7 +36,8 @@ p {
 	margin:0 -5px 10px;
 	background:#123;
 
-	> * {
+	li {
+		cursor: pointer;
 		display:block;
 		width:100px;
 		height:100px;
@@ -63,7 +46,7 @@ p {
 		border:1px dashed #678;
 		padding:1px;
 
-		> * {
+		span {
 			display:block;
 			width:100%;
 			height:100%;

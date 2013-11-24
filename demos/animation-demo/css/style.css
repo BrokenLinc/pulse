@@ -1,9 +1,3 @@
-/*---------------------------------------------------
-    LESS Elements 0.9
-  ---------------------------------------------------
-    A set of useful LESS mixins
-    More info at: http://lesselements.com
-  ---------------------------------------------------*/
 html,
 body {
   padding: 0;
@@ -39,7 +33,6 @@ p {
   line-height: 1.5em;
 }
 .demo-list {
-  *zoom: 1;
   list-style: none;
   padding: 5px;
   margin: 0 -5px 10px;
@@ -47,9 +40,12 @@ p {
 }
 .demo-list:before,
 .demo-list:after {
+  content: " ";
+  /* 1 */
+
   display: table;
-  content: "";
-  line-height: 0;
+  /* 2 */
+
 }
 .demo-list:after {
   clear: both;
@@ -74,25 +70,18 @@ p {
   font-size: 20px;
 }
 .demo-list .pulse-hidden {
-  -moz-opacity: 0;
-  -khtml-opacity: 0;
-  -webkit-opacity: 0;
-  opacity: 0;
-  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
-  filter: alpha(opacity=0);
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
 }
 .demo-list li {
   cursor: pointer;
 }
 .demo-list.single span {
-  -webkit-transition: all 0.4s ease-out;
-  -moz-transition: all 0.4s ease-out;
-  -o-transition: all 0.4s ease-out;
-  transition: all 0.4s ease-out;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 .demo-list.staggered span {
-  -webkit-transition: all 0.2s ease-out;
-  -moz-transition: all 0.2s ease-out;
-  -o-transition: all 0.2s ease-out;
-  transition: all 0.2s ease-out;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
 }

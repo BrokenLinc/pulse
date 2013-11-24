@@ -1,22 +1,23 @@
-@import "../vendor/elements";
+@import "../vendor/bootstrap-mixins";
 
-.transition-delay(@delay: 0.2s) {
-  -moz-transition-delay: @delay;
-  -webkit-transition-delay: @delay;
-  -o-transition-delay: @delay;
-  transition-delay: @delay;
+@duration: 0.4s;
+@duration-micro: 0.05s;
+
+.using-pulse-transition-none() {
+	.transition(none) !important;
 }
 
-.using-pulse-no-transition() {
-	-webkit-transition: none !important;
-	-moz-transition: none !important;
-	-o-transition: none !important;
-	transition: none !important;
+.using-pulse-duration() {
+	.transition(@duration);
+}
+
+.using-pulse-duration-micro() {
+	.transition(@duration-micro);
 }
 
 .using-pulse-moving() {
-	.transition(0.2s);
-	.transition-delay(0.2s);
+	.transition(@duration/2);
+	.transition-delay(@duration/2);
 
 	&.pulse-hidden {
 		.transition-delay(0);
