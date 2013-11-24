@@ -152,7 +152,7 @@
 			done = function() {
 				clearInterval(interval);
 			},
-			interval = setInterval(step, config.duration_micro * 1000);
+			interval = setInterval(step, config.duration_micro/2 * 1000);
 		return $(elements);
 	}
 

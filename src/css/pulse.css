@@ -27,6 +27,6 @@
   transition: 0.4s;
 }
 .pulse-duration-micro {
-  -webkit-transition: 0.05s;
-  transition: 0.05s;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
 }
