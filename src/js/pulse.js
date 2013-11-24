@@ -80,6 +80,7 @@
 				if($(this).css('position') == 'static') $(this).addClass('pulse-position-relative');
 			});
 			$children.each(function(index){
+				uncache_size(this, 'pulse-moving-from');
 				uncache_position(this, 'pulse-moving-from');
 			}).addClass('pulse-position-absolute');
 
@@ -102,10 +103,10 @@
 					$elements.remove();
 					//remove item and revert siblings and container to original display settings
 					$all.removeClass('pulse-position-absolute pulse-position-relative pulse-moving').css({
-						top: null,
-						left: null,
-						width: null,
-						height:null
+						top: '',
+						left: '',
+						width: '',
+						height: ''
 					});
 				}, 400);
 

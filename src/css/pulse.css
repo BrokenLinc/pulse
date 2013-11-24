@@ -28,6 +28,7 @@
 }
 .pulse-position-absolute {
   position: absolute;
+  display: block;
 }
 .pulse-position-relative {
   position: relative;
