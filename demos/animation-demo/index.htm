@@ -8,6 +8,8 @@
 
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 		<script src="../../src/js/pulse.js"></script>
+		<script src="../../src/js/pulse-manipulation.js"></script>
+		<script src="../../src/js/pulse-drawing.js"></script>
 	</head>
 	<body>
 		<div class="perimeter">
@@ -64,11 +66,11 @@
 		<script>
 		$(function(){
 
-			$().pulse({}); //config object
+			$().pulse({}); //optional config
 
 			//Single Click-to-hide
 			$('.demo-list.single li').on('click', function(){
-				$('span', this).pulse().toggle().pulse().test();
+				$('span', this).pulse().toggle();
 			});
 
 			//Staggered Animation
