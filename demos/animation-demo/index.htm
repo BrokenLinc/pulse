@@ -37,9 +37,10 @@
 				<li><span>D</span></li>
 			</ul>
 
-			<h1>Single Click-to-remove</h1>
+			<h1>List Manipulations</h1>
+			<p><a class="prepend-item" href="javascript:void(0);">PREPEND</a></p>
 
-			<ul class="demo-list removal">
+			<ul class="demo-list manipulation">
 				<li><span>A</span></li>
 				<li><span>B</span></li>
 				<li><span>C</span></li>
@@ -69,9 +70,14 @@
 				$('span', this).pulse().toggleList();
 			});
 
-			//Single Click-to-remove
-			$('.demo-list.removal li').on('click', function(){
+			//List item removal
+			$('.demo-list.manipulation').on('click', 'li', function(){
 				$(this).pulse().remove();
+			});
+
+			//List item prepend
+			$('.prepend-item').on('click', function(){
+				$('<li><span>NEW</span></li>').pulse().prependTo('.demo-list.manipulation');
 			});
 
 		});

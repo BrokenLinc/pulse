@@ -17,9 +17,9 @@
 
 .using-pulse-moving() {
 	.transition(@duration/2);
-	.transition-delay(@duration/2);
+}
 
-	&.pulse-hidden {
-		.transition-delay(0);
-	}
+.using-pulse-moving-delayed() {
+	.using-pulse-moving();
+	.transition-delay(@duration/2);
 }

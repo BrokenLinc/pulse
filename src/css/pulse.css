@@ -5,12 +5,12 @@
 .pulse-moving {
   -webkit-transition: 0.2s;
   transition: 0.2s;
+}
+.pulse-moving-delayed {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
   -webkit-transition-delay: 0.2s;
   transition-delay: 0.2s;
-}
-.pulse-moving.pulse-hidden {
-  -webkit-transition-delay: 0;
-  transition-delay: 0;
 }
 .pulse-position-absolute {
   position: absolute;
