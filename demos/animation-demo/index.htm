@@ -38,7 +38,11 @@
 			</ul>
 
 			<h1>List Manipulations</h1>
-			<p><a class="prepend-item" href="javascript:void(0);">PREPEND</a></p>
+			<p>
+				<a class="prepend-item" href="javascript:void(0);">prepend</a> |
+				<a class="append-item" href="javascript:void(0);">append</a> |
+				<a class="after-random-item" href="javascript:void(0);">after random</a>
+			</p>
 
 			<ul class="demo-list manipulation">
 				<li><span>A</span></li>
@@ -77,7 +81,13 @@
 
 			//List item prepend
 			$('.prepend-item').on('click', function(){
-				$('<li><span>NEW</span></li>').pulse().prependTo('.demo-list.manipulation');
+				$('<li><span>prepended</span></li>').pulse().prependTo('.demo-list.manipulation');
+			});
+			$('.append-item').on('click', function(){
+				$('<li><span>appended</span></li>').pulse().appendTo('.demo-list.manipulation');
+			});
+			$('.after-random-item').on('click', function(){
+				$('<li><span>insertAfter</span></li>').pulse().insertAfter($('.demo-list.manipulation li').pulse().random());
 			});
 
 		});

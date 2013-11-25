@@ -67,138 +67,23 @@
 		},
 
 		remove: function(done_callback_fn){
-			var $elements = $(this),
-				$parents = $elements.parent(),
-				$children = $parents.children(),
-				$siblings = $elements.siblings(),
-				$all = $parents.add($children);
-
-			// cache current sizes/positions
-			cache_display($all, config.key_moving_from);
-
-			// ***** predict new positions:
-			// simulate removal
-			$elements.addClass(config.class_removed);
-			// cache new sizes/positions of container and siblings
-			cache_display($all, config.key_moving_to);
-			// undo sim
-			$elements.removeClass(config.class_removed);
-
-			// ***** prep for transition
-			// shift container and siblings to absolute positioning
-			$parents.each(function(index){
-				if($(this).css('position') == 'static') $(this).addClass(config.class_position_relative);
-			});
-			// at current position 
-			uncache_size($all, config.key_moving_from);
-			uncache_position($children, config.key_moving_from);
-			$children.addClass(config.class_position_absolute);
-
-			// (transition delay hack)
-			setTimeout(function(){
-				// and mark as "moving"
-				$parents.add($siblings).addClass(config.class_moving_delayed);
-				// hide item
-				$elements
-					.addClass(config.class_moving)
-					.addClass(config.class_hidden);
-				// and set new positions and sizes of container and siblings
-				uncache_size($parents, config.key_moving_to);
-				uncache_position($siblings, config.key_moving_to);
-
-				// after transition is complete
-				setTimeout(function(){
-					// remove items
-					$elements.remove();
-					// revert siblings and container to original display settings
-					$all.removeClass([
-							config.class_position_absolute, 
-							config.class_position_relative, 
-							config.class_moving,
-							config.class_moving_delayed
-						].join(' ')).css({
-							top: '',
-							left: '',
-							width: '',
-							height: ''
-					});
-					// fire complete callback
-					if(done_callback_fn) done_callback_fn();
-				}, config.duration * 1000);
-			}, 10);
-
-			return $(this);
+			return list_manipulation(this, false, done_callback_fn);
 		},
 
 		prependTo: function(parents, done_callback_fn){
+			return list_manipulation($(this).prependTo(parents), true, done_callback_fn);
+		},
 
-			// % add item
-			$(this).prependTo(parents);
+		appendTo: function(parents, done_callback_fn){
+			return list_manipulation($(this).appendTo(parents), true, done_callback_fn);
+		},
 
-			var $elements = $(this),
-				$parents = $(parents),
-				$children = $parents.children(),
-				$siblings = $elements.siblings(),
-				$all = $parents.add($children);
+		insertAfter: function(precedents, done_callback_fn){
+			return list_manipulation($(this).insertAfter(precedents), true, done_callback_fn);
+		},
 
-			// % cache new sizes/positions
-			cache_display($all, config.key_moving_to);
-
-			// ***** predict new positions:
-			// % element doesn't move
-			cache_display($elements, config.key_moving_from);
-			// % simulate revert of other elements once element is removed
-			$elements
-				.addClass(config.class_removed)
-				.addClass(config.class_hidden);
-			// % cache new sizes/positions of container and siblings
-			cache_display($parents.add($siblings), config.key_moving_from);
-			// undo sim
-			$elements.removeClass(config.class_removed)
-
-			// ***** prep for transition
-			// shift container and siblings to absolute positioning
-			$parents.each(function(index){
-				if($(this).css('position') == 'static') $(this).addClass(config.class_position_relative);
-			});
-			// at current position 
-			uncache_size($all, config.key_moving_from);
-			uncache_position($children, config.key_moving_from);
-			$children.addClass(config.class_position_absolute);
-
-			// (transition delay hack)
-			setTimeout(function(){
-				// % and mark as "moving"
-				$parents.add($siblings).addClass(config.class_moving);
-				// % show item
-				$elements
-					.addClass(config.class_moving_delayed)
-					.removeClass(config.class_hidden);
-				// % and set new positions and sizes of container and siblings
-				uncache_size($all, config.key_moving_to);
-				uncache_position($children, config.key_moving_to);
-
-				// after transition is complete
-				setTimeout(function(){
-					// %
-					// revert siblings and container to original display settings
-					$all.removeClass([
-							config.class_position_absolute, 
-							config.class_position_relative, 
-							config.class_moving,
-							config.class_moving_delayed
-						].join(' ')).css({
-							top: '',
-							left: '',
-							width: '',
-							height: ''
-					});
-					// fire complete callback
-					if(done_callback_fn) done_callback_fn();
-				}, config.duration * 1000);
-			}, 10);
-
-			return $(this);
+		random: function() {
+			return $(this).get(Math.floor(Math.random()*$(this).length));
 		},
 
 	};
@@ -254,6 +139,88 @@
 				from = $element.data(key);
 			$element.css({top: from.top, left: from.left});
 		});
+	}
+
+	function list_manipulation(elements, isAdding, done_callback_fn) {
+		var $elements = $(elements),
+			$parents = $elements.parent(),
+			$children = $parents.children(),
+			$siblings = $elements.siblings(),
+			$all = $parents.add($children);
+
+		// cache current sizes/positions
+		cache_display($all, isAdding? config.key_moving_to : config.key_moving_from);
+
+		// ***** predict alternate positions:
+		if(isAdding) {
+			// element doesn't move
+			cache_display($elements, config.key_moving_from);
+			// simulate revert of other elements once element is removed
+			$elements
+				.addClass(config.class_removed)
+				.addClass(config.class_hidden);
+			// cache new sizes/positions of container and siblings
+			cache_display($parents.add($siblings), config.key_moving_from);
+		} else {
+			// simulate removal
+			$elements.addClass(config.class_removed);
+			// cache new sizes/positions of container and siblings
+			cache_display($all, config.key_moving_to);
+		}
+		// undo sim
+		$elements.removeClass(config.class_removed);
+
+		// ***** prep for transition
+		// shift container and siblings to absolute positioning
+		$parents.each(function(index){
+			if($(this).css('position') == 'static') $(this).addClass(config.class_position_relative);
+		});
+		// at current position 
+		uncache_size($all, config.key_moving_from);
+		uncache_position($children, config.key_moving_from);
+		$children.addClass(config.class_position_absolute);
+
+		// (transition delay hack)
+		setTimeout(function(){
+			// and mark as "moving"
+			$parents.add($siblings).addClass(isAdding? config.class_moving : config.class_moving_delayed);
+			if(isAdding) {
+				// show item
+				$elements
+					.addClass(config.class_moving_delayed)
+					.removeClass(config.class_hidden);
+			} else {
+				// hide item
+				$elements
+					.addClass(config.class_moving)
+					.addClass(config.class_hidden);
+			}
+			// and set new positions and sizes of container and siblings
+			uncache_size(isAdding? $all : $parents, config.key_moving_to);
+			uncache_position(isAdding? $children : $siblings, config.key_moving_to);
+
+			// after transition is complete
+			setTimeout(function(){
+				// remove items
+				if(!isAdding) $elements.remove();
+				// revert siblings and container to original display settings
+				$all.removeClass([
+						config.class_position_absolute, 
+						config.class_position_relative, 
+						config.class_moving,
+						config.class_moving_delayed
+					].join(' ')).css({
+						top: '',
+						left: '',
+						width: '',
+						height: ''
+				});
+				// fire complete callback
+				if(done_callback_fn) done_callback_fn();
+			}, config.duration * 1000);
+		}, 10);
+
+		return $(this);
 	}
 
 	var num = function (value) {
