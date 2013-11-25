@@ -1,17 +1,19 @@
 (function($) {
-	var parts, config = {
-		class_hidden: 'pulse-hidden',
-		class_transition_none: 'pulse-no-transition',
-		class_moving: 'pulse-moving',
-		class_moving_delayed: 'pulse-moving-delayed',
-		class_position_absolute: 'pulse-position-absolute',
-		class_position_relative: 'pulse-position-relative',
-		class_removed: 'pulse-removed',
-		class_duration: 'pulse-duration',
-		class_duration_micro: 'pulse-duration-micro',
-		key_moving_from: 'pulse-moving-from',
-		key_moving_to: 'pulse-moving-to'
-	};
+	var parts, 
+		old = $.fn.pulse, 
+		config = {
+			class_hidden: 'pulse-hidden',
+			class_transition_none: 'pulse-no-transition',
+			class_moving: 'pulse-moving',
+			class_moving_delayed: 'pulse-moving-delayed',
+			class_position_absolute: 'pulse-position-absolute',
+			class_position_relative: 'pulse-position-relative',
+			class_removed: 'pulse-removed',
+			class_duration: 'pulse-duration',
+			class_duration_micro: 'pulse-duration-micro',
+			key_moving_from: 'pulse-moving-from',
+			key_moving_to: 'pulse-moving-to'
+		};
 
 	$(function(){
 		//grab durations from css
@@ -23,10 +25,13 @@
 		config.duration_micro = Number(d_m.substr(0,d_m.length-1));
 	});
 
+	var old = $.fn.pulse;
+
 	$.fn.pulse = function (custom_config) {
 		$.extend(config, custom_config);
-		$.extend(this, parts);
-		return this;
+		var that = old? old.apply(this, arguments) : this;
+		$.extend(that, parts);
+		return that;
 	};
 
 	parts = {

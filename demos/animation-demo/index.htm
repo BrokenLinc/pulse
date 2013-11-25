@@ -64,9 +64,11 @@
 		<script>
 		$(function(){
 
+			$().pulse({}); //config object
+
 			//Single Click-to-hide
 			$('.demo-list.single li').on('click', function(){
-				$('span', this).pulse().toggle();
+				$('span', this).pulse().toggle().pulse().test();
 			});
 
 			//Staggered Animation
