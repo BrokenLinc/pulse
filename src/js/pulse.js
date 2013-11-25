@@ -14,6 +14,7 @@
 	};
 
 	$(function(){
+		//grab durations from css
 		var $e = $('<div><div style="display:none;" class="'+config.class_duration+'"/><div style="display:none;" class="'+config.class_duration_micro+'"/></div>').appendTo(document.body);
 		var d = $('.'+config.class_duration, $e).css('transition-duration');
 		var d_m = $('.'+config.class_duration_micro, $e).css('transition-duration');
@@ -107,7 +108,7 @@
 			done = function() {
 				clearInterval(interval);
 			},
-			interval = setInterval(step, config.duration_micro/2 * 1000);
+			interval = setInterval(step, config.duration_micro/8 * 1000);
 		return $(elements);
 	}
 
@@ -145,8 +146,9 @@
 		var $elements = $(elements),
 			$parents = $elements.parent(),
 			$children = $parents.children(),
-			$siblings = $elements.siblings(),
+			$siblings = $children.not($elements),
 			$all = $parents.add($children);
+			$everythingBut = $parents.add($siblings);
 
 		// cache current sizes/positions
 		cache_display($all, isAdding? config.key_moving_to : config.key_moving_from);
@@ -160,7 +162,7 @@
 				.addClass(config.class_removed)
 				.addClass(config.class_hidden);
 			// cache new sizes/positions of container and siblings
-			cache_display($parents.add($siblings), config.key_moving_from);
+			cache_display($everythingBut, config.key_moving_from);
 		} else {
 			// simulate removal
 			$elements.addClass(config.class_removed);
@@ -183,7 +185,7 @@
 		// (transition delay hack)
 		setTimeout(function(){
 			// and mark as "moving"
-			$parents.add($siblings).addClass(isAdding? config.class_moving : config.class_moving_delayed);
+			$everythingBut.addClass(isAdding? config.class_moving : config.class_moving_delayed);
 			if(isAdding) {
 				// show item
 				$elements
@@ -220,7 +222,7 @@
 			}, config.duration * 1000);
 		}, 10);
 
-		return $(this);
+		return $elements;
 	}
 
 	var num = function (value) {
