@@ -51,10 +51,6 @@
 			return list_manipulation($(this).insertAfter(precedents), true, done_callback_fn);
 		},
 
-		random: function() {
-			return $(this).get(Math.floor(Math.random()*$(this).length));
-		},
-
 	};
 
 	function cache_display(elements, key) {

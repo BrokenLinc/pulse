@@ -64,25 +64,9 @@
 			});
 		},
 
-		remove: function(done_callback_fn){
-			return list_manipulation(this, false, done_callback_fn);
-		},
-
-		prependTo: function(parents, done_callback_fn){
-			return list_manipulation($(this).prependTo(parents), true, done_callback_fn);
-		},
-
-		appendTo: function(parents, done_callback_fn){
-			return list_manipulation($(this).appendTo(parents), true, done_callback_fn);
-		},
-
-		insertAfter: function(precedents, done_callback_fn){
-			return list_manipulation($(this).insertAfter(precedents), true, done_callback_fn);
-		},
-
 		random: function() {
 			return $(this).get(Math.floor(Math.random()*$(this).length));
-		},
+		}
 
 	};
 
