@@ -48,20 +48,20 @@
 			return toggle_element(this, false, true);
 		},
 
-		toggleList: function(){
+		toggleList: function(iteration_delay){
 			return iterate_over_items(this, function(element){
 				toggle_element(element);
-			});
+			}, iteration_delay);
 		},
-		showList: function(){
+		showList: function(iteration_delay){
 			return iterate_over_items(this, function(element){
 				toggle_element(element, true);
-			});
+			}, iteration_delay);
 		},
-		hideList: function(){
+		hideList: function(iteration_delay){
 			return iterate_over_items(this, function(element){
 				toggle_element(element, false);
-			});
+			}, iteration_delay);
 		},
 
 		random: function() {
@@ -79,7 +79,7 @@
 		return $element;
 	}
 
-	function iterate_over_items(elements, fn) {
+	function iterate_over_items(elements, fn, iteration_delay) {
 		var index = 0,
 			step = function() {
 				if(index < elements.length) fn(elements[index]);
@@ -89,7 +89,7 @@
 			done = function() {
 				clearInterval(interval);
 			},
-			interval = setInterval(step, config.duration_micro/8 * 1000);
+			interval = setInterval(step, (iteration_delay || config.duration_micro/8) * 1000);
 		return $(elements);
 	}
 
