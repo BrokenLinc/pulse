@@ -1,0 +1,82 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+body {
+  font-family: myriad-pro, Arial, sans-serif;
+  color: #4d7399;
+  background: #223344;
+  font-size: 14px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+  line-height: 1em;
+}
+h1 {
+  font-size: 35px;
+}
+h3 {
+  font-size: 21px;
+}
+p {
+  line-height: 1.5em;
+}
+a {
+  color: #99b2cc;
+}
+.perimeter {
+  padding: 20px;
+}
+.demo-list {
+  list-style: none;
+  padding: 5px;
+  margin: 0 -5px 10px;
+  background: #1a2633;
+}
+.demo-list:before,
+.demo-list:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+.demo-list:after {
+  clear: both;
+}
+.demo-list li {
+  cursor: pointer;
+  display: block;
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+  float: left;
+  border: 1px dashed #678;
+  padding: 1px;
+}
+.demo-list li span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: #668844;
+  color: #b3cc99;
+  text-align: center;
+  line-height: 100px;
+  font-size: 20px;
+}
+.demo-line-drawing svg {
+  background: transparent !important;
+}
+.demo-line-drawing path {
+  stroke: white;
+  fill: #223344;
+}

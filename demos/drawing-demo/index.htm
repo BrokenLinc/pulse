@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Drawing Demo</title>
+
+		<link rel="stylesheet" type="text/css" href="../../src/css/pulse.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<script src="../../src/js/pulse-drawing.js"></script>
+	</head>
+	<body>
+		<div class="perimeter">
+			<h1>Draw lines</h1>
+			<div class="demo-line-drawing demo-1">
+				<a href="javascript:void(0)">Start</a>
+			</div>
+		</div>
+
+		<script>
+		$(function(){
+
+			$().pulse({}); //optional config
+
+			//Load SVG
+			$.get('352-rings.svg').done(function(data){
+				$('svg', data).appendTo('.demo-1');
+			});
+
+			//Draw lines
+			$('.demo-1 a').on('click', function(){
+				$('.demo-1 path').pulse().drawLines(5);
+			});
+
+		});
+		</script>
+
+	</body>
+</html>

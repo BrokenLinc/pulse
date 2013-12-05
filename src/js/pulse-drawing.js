@@ -12,8 +12,16 @@
 	};
 
 	parts = {
-		drawLines: function(){
-			//Coming soon!
+		drawLines: function(drawDuration){
+			$(this).each(function(){
+				var pathLength=this.getTotalLength();
+				$(this).stop().css({
+					'stroke-dasharray':pathLength+'px,'+pathLength+'px',
+					'stroke-dashoffset':pathLength+'px'})
+				.delay(10)
+				.animate({'stroke-dashoffset':0},drawDuration*1000);
+			});
+
 			return $(this);
 		}
 	};

@@ -2,6 +2,7 @@
 
 @base-color:#234;
 @accent-color:lighten(spin(@base-color, -120), 20);
+@background: @base-color;
 
 html, body {
 	padding:0;
@@ -12,7 +13,7 @@ html, body {
 body {
 	font-family: myriad-pro, Arial, sans-serif;
 	color:lighten(@base-color, 25);
-	background:@base-color;
+	background:@background;
 	font-size:14px;
 }
 h1, h2, h3, h4, h5, h6 {
