@@ -11,7 +11,8 @@
 			class_position_relative: 'pulse-position-relative',
 			class_removed: 'pulse-removed',
 			key_moving_from: 'pulse-moving-from',
-			key_moving_to: 'pulse-moving-to'
+			key_moving_to: 'pulse-moving-to',
+			key_busy: 'pulse-manipulation-isbusy'
 		};
 
 	$(function(){
@@ -34,24 +35,44 @@
 	};
 
 	parts = {
-
 		remove: function(done_callback_fn){
-			return list_manipulation(this, false, done_callback_fn);
+			var $this = $(this);
+			doWhenElementIsFree(function(){
+				list_manipulation($this, false, done_callback_fn);
+			}, $this.parent());
+			return $this;
 		},
 
 		prependTo: function(parents, done_callback_fn){
-			return list_manipulation($(this).prependTo(parents), true, done_callback_fn);
+			var $this = $(this);
+			doWhenElementIsFree(function(){
+				list_manipulation($this.prependTo(parents), true, done_callback_fn);
+			}, $(parents));
+			return $this;
 		},
 
 		appendTo: function(parents, done_callback_fn){
-			return list_manipulation($(this).appendTo(parents), true, done_callback_fn);
+			var $this = $(this);
+			doWhenElementIsFree(function(){
+				list_manipulation($this.appendTo(parents), true, done_callback_fn);
+			}, $(parents));
+			return $this;
 		},
 
 		insertAfter: function(precedents, done_callback_fn){
-			return list_manipulation($(this).insertAfter(precedents), true, done_callback_fn);
+			var $this = $(this);
+			doWhenElementIsFree(function(){
+				list_manipulation($this.insertAfter(precedents), true, done_callback_fn);
+			}, $(precedents).parent());
+			return $this;
 		},
 
 	};
+
+	function doWhenElementIsFree(fn, element) {
+		if(!$(element).data(config.key_busy)) fn();
+		else setTimeout(function() { doWhenElementIsFree(fn, element); }, 1);
+	}
 
 	function cache_display(elements, key) {
 		$(elements).each(function(index){
@@ -90,6 +111,8 @@
 			$siblings = $children.not($elements),
 			$all = $parents.add($children);
 			$everythingBut = $parents.add($siblings);
+
+		$parents.data(config.key_busy, true);
 
 		// cache current sizes/positions
 		cache_display($all, isAdding? config.key_moving_to : config.key_moving_from);
@@ -158,12 +181,11 @@
 						width: '',
 						height: ''
 				});
+				$parents.data(config.key_busy, false);
 				// fire complete callback
 				if(done_callback_fn) done_callback_fn();
 			}, config.duration * 1000);
 		}, 10);
-
-		return $elements;
 	}
 
 	var num = function (value) {
