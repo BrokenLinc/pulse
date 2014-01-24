@@ -1,25 +1,29 @@
+@import "variables";
 @import "../vendor/bootstrap-mixins";
 
-@duration: 0.4s;
-@duration-micro: 0.2s;
+#pulse {
 
-.using-pulse-transition-none() {
-	.transition(none) !important;
-}
+	@duration: @pulse-duration;
+	@duration-micro: @pulse-duration-micro;
 
-.using-pulse-duration() {
-	.transition(@duration);
-}
+	.transition-none() {
+		.transition(none) !important;
+	}
 
-.using-pulse-duration-micro() {
-	.transition(@duration-micro);
-}
+	.duration() {
+		.transition(@duration);
+	}
 
-.using-pulse-moving() {
-	.transition(@duration/2);
-}
+	.duration-micro() {
+		.transition(@duration-micro);
+	}
 
-.using-pulse-moving-delayed() {
-	.using-pulse-moving();
-	.transition-delay(@duration/2);
+	.moving() {
+		.transition(@duration/2);
+	}
+
+	.moving-delayed() {
+		#pulse>.moving();
+		.transition-delay(@duration/2);
+	}
 }

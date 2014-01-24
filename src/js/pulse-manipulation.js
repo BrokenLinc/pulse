@@ -25,8 +25,6 @@
 		config.duration_micro = Number(d_m.substr(0,d_m.length-1));
 	});
 
-	var old = $.fn.pulse;
-
 	$.fn.pulse = function (custom_config) {
 		$.extend(config, custom_config);
 		var that = old? old.apply(this, arguments) : this;

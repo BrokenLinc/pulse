@@ -4,12 +4,12 @@
 		<title>Animation Demo</title>
 
 		<link rel="stylesheet" type="text/css" href="../../src/css/pulse.css">
+		<link rel="stylesheet" type="text/css" href="../../src/css/pulse-transitions.css">
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 		<script src="../../src/js/pulse.js"></script>
 		<script src="../../src/js/pulse-manipulation.js"></script>
-		<script src="../../src/js/pulse-drawing.js"></script>
 	</head>
 	<body>
 		<div class="perimeter">
@@ -21,6 +21,16 @@
 				<li><span>B</span></li>
 				<li><span>C</span></li>
 				<li><span>D</span></li>
+			</ul>
+
+			<h1>Single toggle w/custom easing &amp; duration</h1>
+			<p>Click an item to toggle its visibility</p>
+
+			<ul class="demo-list single-fx">
+				<li class="first"><span>A</span></li>
+				<li class="second"><span>B</span></li>
+				<li class="third"><span>C</span></li>
+				<li class="fourth"><span>D</span></li>
 			</ul>
 
 			<h1>Staggered toggle</h1>
@@ -74,6 +84,20 @@
 			//Single Click-to-hide
 			$('.demo-list.single li').on('click', function(){
 				$('span', this).pulse().toggle();
+			});
+
+			//Custom easing and duration
+			$('.demo-list.single-fx .first').on('click', function(){
+				$('span', this).pulse().toggle('ease-in', 200);
+			});
+			$('.demo-list.single-fx .second').on('click', function(){
+				$('span', this).pulse().toggle('ease-in-cubic', 600);
+			});
+			$('.demo-list.single-fx .third').on('click', function(){
+				$('span', this).pulse().toggle('ease-out', 1000);
+			});
+			$('.demo-list.single-fx .fourth').on('click', function(){
+				$('span', this).pulse().toggle('ease-out-cubic', 2000);
 			});
 
 			//Staggered Animation

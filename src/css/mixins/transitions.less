@@ -1,6 +1,8 @@
+@import "variables";
+
 #ease {
 
-  @durationDefault: 1000ms;
+  @durationDefault: @pulse-duration;
   @propertyDefault: all;
 
   .linear(@duration: @durationDefault; @property: @propertyDefault) {

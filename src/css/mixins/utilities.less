@@ -1,18 +1,20 @@
 @import "../vendor/bootstrap-mixins";
 
-.scale-and-rotate(@ratio, @degrees) {
-	  -webkit-transform: scale(@ratio) rotate(@degrees);
-	      -ms-transform: scale(@ratio) rotate(@degrees); // IE9+
-	          transform: scale(@ratio) rotate(@degrees);
-}
+#pulse {
+	.scale-and-rotate(@ratio, @degrees) {
+		  -webkit-transform: scale(@ratio) rotate(@degrees);
+		      -ms-transform: scale(@ratio) rotate(@degrees); // IE9+
+		          transform: scale(@ratio) rotate(@degrees);
+	}
 
-.using-pulse-position-absolute() {
-	position: absolute;
-	display:block;
-}
-.using-pulse-position-relative() {
-	position: relative;
-}
-.using-pulse-removed() {
-	display:none !important;
+	.position-absolute() {
+		position: absolute;
+		display:block;
+	}
+	.position-relative() {
+		position: relative;
+	}
+	.removed() {
+		display:none !important;
+	}
 }
